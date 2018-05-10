@@ -11,18 +11,19 @@ const config = {
  * debug不使用https
  * product将使用https
  */
-    mode: "debug",
+    mode: "product",
     // mode: "product",
 /**
  * express监听端口
  */
     port: 80,
+    https_port: 443,
 
 /**
  * HTTPS设置
  */
     https_key_file: path.resolve(__dirname, "../https/domain.key"),
-    https_cert_file: path.resolve(__dirname, "./https/domain.cert"),
+    https_cert_file: path.resolve(__dirname, "../https/domain.cert"),
 
 /**
  * 微信相关设置

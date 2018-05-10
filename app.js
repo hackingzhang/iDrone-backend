@@ -4,6 +4,7 @@
 'use strict';
 
 const fs = require("fs");
+const http = require("http");
 const https = require("https");
 const express = require("express");
 
@@ -18,11 +19,12 @@ router(app);
 
 if (config.mode === "product") {
   let httpsOptions = {
-    key: fs.readFileSync(),
-    cert: fs.readFileSync(),
+    key: fs.readFileSync(config.https_key_file),
+    cert: fs.readFileSync(config.https_cert_file)
   }
 
-  
+  http.createServer(app).listen(config.port);
+  https.createServer(httpsOptions, app).listen(config.https_port);
 }
 else {
   app.listen(config.port, () => {
