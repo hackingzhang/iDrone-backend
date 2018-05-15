@@ -1,11 +1,3 @@
-'use strict';
-
-'use strict';
-
-'use strict';
-
-'use strict';
-
 const chai = require("chai");
 const chaiAsPromised = require("chai-as-promised");
 const {Goods, GoodsCategory} = require("../../utils/orm");
@@ -30,7 +22,7 @@ describe("goodsModel", function() {
 	describe("#add()", function() {
 		it("应该返回刚添加的商品信息", function() {
 			return expect(
-				goodsModel.add("固定翼FPV", 
+				goodsModel.add("固定翼FPV",
 					"5999",
 					"123",
 					"456",
@@ -48,7 +40,7 @@ describe("goodsModel", function() {
 			goods2 = null;
 
 		before("添加商品", async function() {
-			goods1 = await goodsModel.add("固定翼FPV", 
+			goods1 = await goodsModel.add("固定翼FPV",
 				"5999",
 				"123",
 				"456",
@@ -59,7 +51,7 @@ describe("goodsModel", function() {
 				"1"
 			);
 
-			goods2 = await goodsModel.add("竞速四旋翼", 
+			goods2 = await goodsModel.add("竞速四旋翼",
 				"5999",
 				"123",
 				"456",
@@ -95,7 +87,7 @@ describe("goodsModel", function() {
 	describe("#getListByCategory()", function() {
 		before("添加商品", async function() {
 			for(let i=0;i<30;i++){
-				await goodsModel.add("固定翼FPV", 
+				await goodsModel.add("固定翼FPV",
 					"5999",
 					"123",
 					"456",
@@ -108,7 +100,7 @@ describe("goodsModel", function() {
 			};
 
 			for(i=0;i<30;i++){
-				await goodsModel.add("竞速四旋翼", 
+				await goodsModel.add("竞速四旋翼",
 					"5999",
 					"123",
 					"456",
@@ -153,7 +145,7 @@ describe("goodsModel", function() {
 	describe("#search()", function() {
 		before("添加商品", async function() {
 			for(let i=0;i<30;i++){
-				await goodsModel.add("固定翼FPV", 
+				await goodsModel.add("固定翼FPV",
 					"5999",
 					"123",
 					"456",
@@ -165,7 +157,7 @@ describe("goodsModel", function() {
 				);
 			};
 			for(i=0;i<30;i++){
-				await goodsModel.add("竞速四旋翼", 
+				await goodsModel.add("竞速四旋翼",
 					"5999",
 					"123",
 					"456",
@@ -198,7 +190,7 @@ describe("goodsModel", function() {
 	describe("#search()", function() {
 		before("添加商品", async function() {
 			for(let i=0;i<30;i++){
-				await goodsModel.add("固定翼FPV", 
+				await goodsModel.add("固定翼FPV",
 					"5999",
 					"123",
 					"456",

@@ -1,11 +1,3 @@
-'use strict';
-
-'use strict';
-
-'use strict';
-
-'use strict';
-
 const chai = require("chai");
 const chaiAsPromised = require("chai-as-promised");
 const {Video, User} = require("../../utils/orm");

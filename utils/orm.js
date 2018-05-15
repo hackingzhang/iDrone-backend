@@ -117,8 +117,8 @@ let Video = sequelize.define('video',
   }
 )
 
-Video.belongsTo(User)
-User.hasMany(Video)
+Video.belongsTo(User);
+User.hasMany(Video);
 
 /**
  * 商品分类表
