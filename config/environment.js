@@ -31,7 +31,7 @@ const config = {
 
     app_id: "",
     app_secret: "",
-    authorization_url: `https://api.weixin.qq.com/sns/jscode2session?appid=APPID&secret=SECRET&js_code=JSCODE&grant_type=authorization_code`,
+    authorization_url: `https://api.weixin.qq.com/sns/jscode2session?grant_type=authorization_code`,
 
 /**
  * 目录配置
@@ -107,7 +107,7 @@ const config = {
     db_port: "3306",
     db_type: 'mysql',
     db_database: 'idrone',
-    db_username: 'root',
+    db_username: 'idrone',
     db_password: 'xinyu',
 
     db_pool_max: '40',
