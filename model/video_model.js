@@ -25,22 +25,24 @@ const videoModel = {
    */
   add(title, source, cover, uploaderId) {
     return new Promise((resolve, reject) => {
-      let video = Video.build({
+      let newVideo = Video.build({
         id: uuid.v1(),
         title,
         source,
         cover,
-        upload_at: new Date(),
-        user_id: uploaderId
+        upload_at: new Date()
       });
 
-      // let user = User.build({
-      // 	id: uploaderId
-      // });
+      let user = User.build({
+      	id: uploaderId
+      });
 
-      video.save()
+      newVideo.save()
       .then(video => {
-        resolve(video);
+        return video.setUser(user);
+      })
+      .then(result => {
+        resolve(newVideo);
       })
       .catch(error => {
         reject({ errcode: 500, errmsg: "数据库错误", data: error });
@@ -94,8 +96,7 @@ const videoModel = {
         },
         include: [{
           model: User,
-          attributes: ["avatar", "nickname"],
-          where: { id: Sequelize.col('Video.user_id') }
+          attributes: ["avatar", "nickname"]
         }],
         offset: (page - 1) * countPerPage,
         limit: countPerPage

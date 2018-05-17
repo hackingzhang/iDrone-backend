@@ -39,13 +39,19 @@ const goodsModel = {
         freight,
         image,
         previews,
-        brief,
-        category_id: categoryId
+        brief
+      });
+
+      let goodsCategory = GoodsCategory.build({
+        id: categoryId
       });
 
       newGoods.save()
       .then(goods => {
-        resolve(goods);
+        return goods.setCategory(goodsCategory);
+      })
+      .then(result => {
+        resolve(newGoods);
       })
       .catch(error => {
         reject({ errcode: 500, errmsg: "数据库错误", data: error});

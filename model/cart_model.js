@@ -1,8 +1,5 @@
-'use strict';
-
-'use strict';
-
-'use strict';
+/*jslint es6 */
+/*jslint node: true */
 
 'use strict';
 
