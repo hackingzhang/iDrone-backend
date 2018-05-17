@@ -6,11 +6,6 @@ const expect = chai.expect;
 
 chai.use(chaiAsPromised);
 
-afterEach("清空数据表", async function() {
-	await User.destroy({ where: {} });
-	await Cart.destroy({ where: {} });
-});
-
 describe("userModel", function() {
 	describe("#regist()", function() {
 		it("应返回刚注册的用户信息", function() {
@@ -61,5 +56,10 @@ describe("userModel", function() {
 		it("应该返回404用户不存在", async function() {
 			return expect(userModel.changeAvatar("123456", 'qin')).to.be.rejected;
 		});
+	});
+	
+	afterEach("清空数据表", async function() {
+		await User.destroy({ where: {} });
+		await Cart.destroy({ where: {} });
 	});
 });

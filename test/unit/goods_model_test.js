@@ -6,19 +6,18 @@ const expect = chai.expect;
 
 chai.use(chaiAsPromised);
 
-before("添加商品分类", async function() {
-	await GoodsCategory.create({
-		id: "1",
-		title: "固定翼"
-	});
-
-	await GoodsCategory.create({
-		id: "2",
-		title: "固定翼"
-	});
-});
-
 describe("goodsModel", function() {
+	before("添加商品分类", async function() {
+		await GoodsCategory.create({
+			id: "1",
+			title: "固定翼"
+		});
+	
+		await GoodsCategory.create({
+			id: "2",
+			title: "多旋翼"
+		});
+	});
 	describe("#add()", function() {
 		it("应该返回刚添加的商品信息", function() {
 			return expect(
@@ -215,8 +214,7 @@ describe("goodsModel", function() {
 			await Goods.destroy({ where: {} });
 		});
 	});
-});
-
-after("清除商品分类", function() {
-	GoodsCategory.destroy({ where: {} });
+	after("清除商品分类", function() {
+		GoodsCategory.destroy({ where: {} });
+	});
 });

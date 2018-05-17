@@ -6,12 +6,12 @@ const expect = chai.expect;
 
 chai.use(chaiAsPromised);
 
-before("添加用户", async function() {
-	await User.create({ id: "123456" });
-	await User.create({ id: "654321" });
-});
-
 describe("videoModel", function() {
+	before("添加用户", async function() {
+		await User.create({ id: "123456" });
+		await User.create({ id: "654321" });
+	});
+
 	describe("#add()", function() {
 		it("应该返回刚添加的视频信息", function() {
 			return expect(
@@ -25,8 +25,9 @@ describe("videoModel", function() {
 			return expect(
 				videoModel.add("test video", 
 					"https://hackingzhang.tech/video.mp4",
+					"cover.jpg",
 					"123123")
-				).to.be.rejected;
+				).to.be.eventually.rejected;
 		});
 	});
 
@@ -34,7 +35,7 @@ describe("videoModel", function() {
 		let video = null;
 
 		before("添加视频", async function() {
-			video = await videoModel.add("test video", "https://hackingzhang.tech/video.mp4", "123456");
+			video = await videoModel.add("test video", "https://hackingzhang.tech/video.mp4", "cover.jpg", "123456");
 		});
 
 		it("应返回title为test video的视频信息", async function() {
@@ -53,11 +54,11 @@ describe("videoModel", function() {
 	describe("#getListByUser", function() {
 		before("添加视频", async function() {
 			for(let i=0;i<40;i++){
-				await videoModel.add(`test video${i} of 123456`, "https://hackingzhang.tech/video.mp4", "123456");
+				await videoModel.add(`test video${i} of 123456`, "https://hackingzhang.tech/video.mp4", "cover.jpg", "123456");
 			}
 
 			for(i=0;i<20;i++){
-				await videoModel.add(`test video${i} of 654321`, "https://hackingzhang.tech/video.mp4", "654321");
+				await videoModel.add(`test video${i} of 654321`, "https://hackingzhang.tech/video.mp4", "cover.jpg", "654321");
 			}
 		});
 
@@ -85,7 +86,7 @@ describe("videoModel", function() {
 	describe("#getList", function() {
 		before("添加视频", async function() {
 			for(let i=0;i<40;i++){
-				await videoModel.add(`test video${i} of 123456`, "https://hackingzhang.tech/video.mp4", "123456");
+				await videoModel.add(`test video${i} of 123456`, "https://hackingzhang.tech/video.mp4", "cover.jpg", "123456");
 			}
 		});
 
@@ -105,7 +106,7 @@ describe("videoModel", function() {
 	describe("#search", function() {
 		before("添加视频", async function() {
 			for(let i=0;i<40;i++){
-				await videoModel.add(`FPV第一人称固定翼飞行视频${i}`, "https://hackingzhang.tech/video.mp4", "123456");
+				await videoModel.add(`FPV第一人称固定翼飞行视频${i}`, "https://hackingzhang.tech/video.mp4", "cover.jpg", "123456");
 			}
 		});
 
@@ -125,8 +126,8 @@ describe("videoModel", function() {
 			await Video.destroy({ where: {} });
 		});
 	});
-});
 
-after("清除用户", function() {
-	User.destroy({ where: {} });
+	after("清除用户", function() {
+		User.destroy({ where: {} });
+	});
 });

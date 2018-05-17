@@ -27,10 +27,10 @@ describe("cartModel", function() {
 		}
 	});
 
-	describe("#getByUser()", function() {
+	describe("#get()", function() {
 		it("应该返回包含0条商品信息的cart对象", function() {
 			return expect(
-				cartModel.getByUser("1")
+				cartModel.get("1")
 			).to.be.eventually.have.property("goods").a("array").have.lengthOf(0);
 		});
 
@@ -39,13 +39,13 @@ describe("cartModel", function() {
 			await cartModel.addGoods("1", "102", 2);
 			await cartModel.addGoods("1", "103", 3);
 			return expect(
-				cartModel.getByUser("1")
+				cartModel.get("1")
 			).to.be.eventually.have.property("goods").a("array").have.lengthOf(3);
 		});
 
-		it("应该返回500数据库错误(输入错误的用户ID)", function() {
+		it("应该返回404用户不存在(输入错误的用户ID)", function() {
 			return expect(
-				cartModel.getByUser("12345")
+				cartModel.get("12345")
 			).to.be.eventually.rejected.with.property("errcode").equal(404);
 		});
 
@@ -58,14 +58,14 @@ describe("cartModel", function() {
 		it(`#addGoods("123", "101", 1)`, async function() {
 			return expect(cartModel.addGoods("1", "101", 1)).to.be.eventually.fulfilled;
 		});
-		it(`#addGoods("123", "101", 1)应该返回500数据库错误`, async function() {
+		it(`#addGoods("123", "101", 1)应该返回404用户不存在`, async function() {
 			return expect(
 				cartModel.addGoods("123", "101", 1)
-			).to.be.eventually.rejected.with.property("errcode").equal(500);
+			).to.be.eventually.rejected.with.property("errcode").equal(404);
 		});
 		it(`#addGoods("1", "1237878", 1)应该返回500数据库错误`, async function() {
 			return expect(
-				cartModel.addGoods("123", "101", 1)
+				cartModel.addGoods("1", "1237878", 1)
 			).to.be.eventually.rejected.with.property("errcode").equal(500);
 		});
 
