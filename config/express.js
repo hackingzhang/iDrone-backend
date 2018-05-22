@@ -1,11 +1,3 @@
-'use strict';
-
-'use strict';
-
-'use strict';
-
-'use strict';
-
 /*jslint es6 */
 'use strict';
 
@@ -28,10 +20,14 @@ module.exports = function (app) {
   // sessionId保存在请求头的authorization字段中，格式为"Bearer token"
   app.use(async (req, res, next) => {
     let sessionId;
-    if(req.headers.authorization)
-      var [bearer, token]  = req.headers.authorization.split(' ');
+    if(req.headers.authorization){
+      let authorization  = req.headers.authorization.split(' '),
+          bearer = authorization[0],
+          token = authorization[1];
+
       if(bearer === "Bearer" && (typeof token === 'string') && token.length > 0)
         sessionId = token;
+    }
 
     // 如果sessionID不为空，获取session信息
     if(sessionId != undefined && sessionId.trim().length > 0){
