@@ -1,11 +1,3 @@
-'use strict';
-
-'use strict';
-
-'use strict';
-
-'use strict';
-
 /*jslint es6 */
 'use strict';
 

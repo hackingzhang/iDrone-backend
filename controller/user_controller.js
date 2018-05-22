@@ -75,7 +75,7 @@ router.post('/',
       }
     }).then(wxRes => {
       // 成功获取数据
-      if (!wxRes.data.errcode) {
+      if (wxRes.data.errcode === undefined) {
         let id, idType;
 
         if (wxRes.data.unionid) {
@@ -90,14 +90,14 @@ router.post('/',
         userModel.login(id, idType)
           .then(user => {
             // 用户存在
-            var sessionId = uuid.v1()
+            let sessionId = uuid.v1()
             session.set(sessionId, {
               id: user.id,
               openid: user.openid,
               session_key: wxRes.data.session_key,
               role: "user"
             })
-            wxRes.send({ nickname: user.nickname, avatar: user.avatar, session_id: sessionId })
+            res.send({ nickname: user.nickname, avatar: user.avatar, session_id: sessionId })
           })
           .catch((error) => {
             // 用户不存在，执行注册环节；注册成功后设置session，返回登录成功
@@ -110,7 +110,7 @@ router.post('/',
                   session_key: wxRes.data.session_key,
                   role: "user" });
 
-                  wxRes.send({ nickname: user.nickname, avatar: user.avatar, session_id: sessionId });
+                  res.send({ nickname: user.nickname, avatar: user.avatar, session_id: sessionId });
               })
               // 注册失败
               .catch((error) => {
