@@ -125,8 +125,7 @@ const videoModel = {
         attributes: ["id", "title", "cover", "upload_at"],
         include: [{
           model: User,
-          attributes: ["id", "nickname", "avatar"],
-          where: { id: Sequelize.col('Video.user_id') }
+          attributes: ["id", "nickname", "avatar"]
         }],
         offset: (page - 1) * countPerPage,
         limit: countPerPage,
@@ -162,8 +161,7 @@ const videoModel = {
         },
         include: [{
           model: User,
-          attributes: ["id", "nickname", "avatar"],
-          where: { id: Sequelize.col('Video.user_id') }
+          attributes: ["id", "nickname", "avatar"]
         }],
         offset: (page - 1) * countPerPage,
         limit: countPerPage,
