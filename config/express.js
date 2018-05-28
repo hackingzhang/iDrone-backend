@@ -2,6 +2,7 @@
 'use strict';
 
 const path = require("path");
+const express = require("express");
 const morgan = require("morgan");
 const bodyParser = require("body-parser");
 const session = require("../utils/session");
@@ -15,6 +16,8 @@ module.exports = function (app) {
   app.use(bodyParser.json());
   // 日志
   app.use(morgan('dev'));
+
+  app.use('/', express.static('public'));
 
   // 获取session信息并设置req.session变量
   // sessionId保存在请求头的authorization字段中，格式为"Bearer token"
