@@ -4,3 +4,6 @@ node_modules/
 # HTTPS证书文件和私钥将不包含在git中
 https/*.key
 https/*.cert
+
+public/**/*
+!public/**/.gitkeep
